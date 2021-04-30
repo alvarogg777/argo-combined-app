@@ -1,5 +1,5 @@
 FROM jakejarvis/hugo-extended:0.82.1
-RUN apk add -U git
+RUN apk add -U make bash
 COPY . /src
 RUN make init
 RUN make build
