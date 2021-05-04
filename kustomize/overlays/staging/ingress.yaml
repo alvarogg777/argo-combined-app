@@ -3,19 +3,17 @@ kind: Ingress
 metadata:
   name: argo-combined-app
   annotations:
-    ingress.kubernetes.io/ssl-redirect: "false"
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
-    ingress.kubernetes.io/rewrite-target: /
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+    traefik.ingress.kubernetes.io/router.middlewares: argocd-redirect-http@kubernetescrd
 spec:
   rules:
   - http:
       paths:
       - path: /
-        pathType: ImplementationSpecific
+        pathType: Prefix #ImplementationSpecific
         backend:
           service:
-           name: argo-combined-app
-           port:
-             number: 80
+            name: argo-combined-app
+            port: 
+              number: 80
     host: staging.argo-combined-app.example.com
