@@ -9,7 +9,7 @@ spec:
   - argo-combined-app
   hosts:
   - argo-combined-app.local
-  - argo-combined-app.192.168.1.227
+  - argo-combined-app.istio.example.com
   http:
   - name: primary
     route:
