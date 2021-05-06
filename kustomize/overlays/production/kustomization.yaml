@@ -3,7 +3,7 @@ kind: Kustomization
 resources:
 - ../../base
 - hpa.yaml
-- istio.yaml
+- traefik.yaml
 - rollout.yaml
 namespace: production
 

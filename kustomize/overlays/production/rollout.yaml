@@ -12,7 +12,7 @@ spec:
     metadata:
       labels:
         app: argo-combined-app
-        istio-injection: enabled
+        # istio-injection: enabled
     spec:
       containers:
       - name: argo-combined-app
@@ -46,11 +46,14 @@ spec:
       canaryService: argo-combined-app-canary
       stableService: argo-combined-app
       trafficRouting:
-        istio:
-          virtualService:
-            name: argo-combined-app
-            routes:
-            - primary
+        # istio:
+        traefik:
+          stableIngress:
+            name: argo-combined-app-ingress
+          # virtualService:
+          #  name: argo-combined-app
+          #  routes:
+          #  - primary
       steps:
       - setWeight: 10
       - pause: {duration: 2m}
@@ -86,13 +89,13 @@ spec:
         address: http://prometheus-server.monitoring
         query: |
           sum(irate(
-            istio_requests_total{  
+            traefik_requests_total{  
               reporter="source",
               destination_service=~"{{args.service-name}}",
               response_code=~"2.*"
             }[2m]
           )) / sum(irate(
-            istio_requests_total{
+            traefik_requests_total{
               reporter="source",
               destination_service=~"{{args.service-name}}"
             }[2m]
@@ -107,12 +110,12 @@ spec:
         address: http://prometheus-server.monitoring
         query: |
           sum(irate(
-            istio_request_duration_milliseconds_sum{
+            traefik_request_duration_milliseconds_sum{
               reporter="source",
               destination_service=~"{{args.service-name}}"
             }[2m]
           )) / sum(irate(
-            istio_request_duration_milliseconds_count{
+            traefik_request_duration_milliseconds_count{
               reporter="source",
               destination_service=~"{{args.service-name}}"
             }[2m]

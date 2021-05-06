@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/service-weights: |
+      app-combined-app: 80%
+      app-combined-app-canary: 20%      
+  name: argo-combined-app-ingress
+spec:
+  rules:
+  - http:
+      paths:
+      - backend:
+          serviceName: argo-combined-app
+          servicePort: 80
+        path: /
+      - backend:
+          serviceName: argo-combined-app-canary
+          servicePort: 80
+        path: /

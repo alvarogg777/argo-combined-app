@@ -4,7 +4,7 @@ metadata:
   name: argo-combined-app
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
-    traefik.ingress.kubernetes.io/router.middlewares: argocd-redirect-http@kubernetescrd
+    traefik.ingress.kubernetes.io/router.middlewares: kube-system-redirect-http@kubernetescrd
 spec:
   rules:
   - http:
