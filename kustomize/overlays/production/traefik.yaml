@@ -19,3 +19,4 @@ spec:
           serviceName: argo-combined-app-canary
           servicePort: 80
         path: /
+    host: argo-combined-app.production.example.com
