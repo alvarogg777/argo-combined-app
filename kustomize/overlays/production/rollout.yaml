@@ -48,8 +48,7 @@ spec:
       trafficRouting:
         # istio:
         nginx:
-          stableIngress:
-            name: argo-combined-app-ingress
+          stableIngress: argo-combined-app-ingress
           # virtualService:
           #  name: argo-combined-app
           #  routes:
