@@ -47,7 +47,7 @@ spec:
       stableService: argo-combined-app
       trafficRouting:
         # istio:
-        traefik:
+        nginx:
           stableIngress:
             name: argo-combined-app-ingress
           # virtualService:
